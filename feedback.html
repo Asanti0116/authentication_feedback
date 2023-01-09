@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1 class="display-4">Feedback</h1>
+<p class="lead">Give some feedback.</p>
+
+<form action="/user/{{ user.username }}/feedback/add" method="POST">
+
+  <p>
+    {{ user.username }}
+  </p>
+  {% for field in form
+    if field.widget.input_type != 'hidden' %}
+    <p>
+      {{ field.label }}
+      {{ field(class_="form-control") }}
+  
+      {% for error in field.errors %}
+      {{ error }}
+      {% endfor %}
+    </p>
+    {% endfor %}
+  <!-- <p>
+    Feedback:
+  </p>
+  <textarea class="feedback-input" name="content" ></textarea> -->
+  <button type="submit">Submit</button>
+
+</form>
+
+{% endblock %}
